@@ -1,0 +1,53 @@
+/* =====================================================================
+   page.css  -  THE PAGE'S OWN LAYOUT (header, white sheets, notes)
+   Colours and fonts come from base.css. Questions are styled in forms.css.
+   ===================================================================== */
+
+/* ---------- Header: candle, place card, glass ---------- */
+.hero { display: flex; align-items: flex-end; justify-content: center; gap: 8px; margin: 2px 0 6px; }
+.hero .candle svg, .hero .glass svg { height: 98px; width: auto; display: block; }
+
+.placecard {
+  position: relative;
+  flex: 0 1 300px;
+  background: linear-gradient(#fff, #fbf8f3);
+  border: 1px solid #e4dbcf;
+  border-radius: 3px;
+  box-shadow: 0 10px 18px rgba(58, 38, 27, .28);
+  padding: 18px 16px 12px;
+  text-align: center;
+  transform: rotate(-1.2deg);
+}
+.placecard .painted { position: absolute; left: -18px; top: -24px; width: 72px; pointer-events: none; }
+.placecard .nm { font-family: var(--font-script); font-size: clamp(34px, 9vw, 46px); line-height: 1.05; color: var(--ink); overflow-wrap: anywhere; }
+.placecard .sub { font-style: italic; color: var(--ink-soft); font-size: 16px; }
+
+/* ---------- White sheets that hold the intro and each group of questions ---------- */
+.sheet {
+  background: var(--plate);
+  border: 1px solid #eadfd2;
+  border-radius: 16px;
+  padding: 20px 18px;
+  margin-top: 16px;
+  box-shadow: inset 0 1px 0 #fff, 0 10px 20px rgba(58, 38, 27, .12);
+}
+.sheet h2 { font-family: var(--font-script); font-weight: 400; font-size: clamp(32px, 8vw, 40px); color: var(--rose); line-height: 1.05; }
+.lede { margin: 6px 0 4px; color: var(--ink-soft); font-style: italic; }
+.intro-text { font-size: 21px; text-align: center; margin: 0; }
+
+/* ---------- Extras for questions ---------- */
+/* The "how to measure" help that opens under a question. */
+.help { margin: 6px 0 10px; }
+.help summary { cursor: pointer; color: var(--leaf); font-weight: 700; font-size: 17px; }
+.help p { margin: 8px 0 0; font-size: 17px; color: var(--ink-soft); white-space: pre-line; }   /* pre-line keeps the line breaks from your Sheet */
+
+/* A question the person skipped but must answer. */
+.q.invalid { background: #fff1f1; border-radius: 12px; padding-left: 10px; padding-right: 10px; }
+.q .err { color: #9b2c2c; font-weight: 700; font-size: 16px; margin-top: 6px; }
+.error-summary { background: #fff1f1; color: #9b2c2c; font-weight: 700; border-radius: 12px; padding: 12px 14px; margin-top: 16px; }
+
+/* A hidden box that only robots fill in (so we can ignore their submissions). */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* The small note shown when you open the page with ?check on the end of the address. */
+.source-note { margin-top: 14px; padding: 8px 12px; border-radius: 10px; background: var(--sage-light); color: var(--leaf); font-weight: 700; font-size: 15px; text-align: center; }

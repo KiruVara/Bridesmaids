@@ -1,0 +1,47 @@
+/* =====================================================================
+   effects.css  -  EXTRAS: pop-up message, animations, small screens
+   This file loads last so its rules win when two rules clash.
+   ===================================================================== */
+
+/* The small dark message that pops up at the bottom ("Copied!"). */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 60;                         /* sits on top of everything */
+  background: var(--cloth);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 17px;
+  font-weight: 700;
+  max-width: 90vw;
+  text-align: center;
+}
+
+/* ---------- Candle flame flicker + glow ---------- */
+.flame { transform-box: fill-box; transform-origin: 50% 90%; animation: flick 2.3s ease-in-out infinite; }
+.glow { animation: pulse 3.1s ease-in-out infinite; }
+@keyframes flick {
+  0%, 100% { transform: scale(1, 1) rotate(-1.5deg); }
+  30% { transform: scale(.94, 1.07) rotate(1.5deg); }
+  60% { transform: scale(1.04, .95) rotate(-1deg); }
+}
+@keyframes pulse { 0%, 100% { opacity: .85; } 50% { opacity: 1; } }
+
+/* ---------- Falling petals (shown when the envelope opens / answers are sent) ---------- */
+.petals { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 50; }
+.petal { position: absolute; top: -6vh; width: 12px; height: 16px; border-radius: 80% 0 80% 0; opacity: .9; animation: fall linear forwards; }
+@keyframes fall { to { transform: translate3d(var(--dx, 30px), 112vh, 0) rotate(540deg); } }
+
+/* Some people ask their phone to reduce motion; we switch animations off for them. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Very narrow phones: hide the side candle + glass so the place card has room. */
+@media (max-width: 360px) {
+  .hero .candle, .hero .glass { display: none; }
+  .runner { padding-left: 12px; padding-right: 12px; }
+}

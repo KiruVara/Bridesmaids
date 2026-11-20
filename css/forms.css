@@ -1,0 +1,94 @@
+/* =====================================================================
+   forms.css  -  QUESTIONS AND THE SEND PAGE
+   Text boxes, the pill-shaped choice buttons ("chips"), colour swatches,
+   and the Send page.
+   ===================================================================== */
+
+/* ---------- One question ---------- */
+.q { padding: 16px 0; border-bottom: 2px dotted rgba(134, 163, 131, .6); }
+.q:last-of-type { border-bottom: 0; }
+.q .lbl { display: block; font-weight: 700; font-size: 21px; line-height: 1.25; }   /* the question text */
+.req { color: var(--rose); font-size: 14px; font-weight: 700; margin-left: 8px; white-space: nowrap; }   /* the word "needed" */
+.hint { margin: 2px 0 9px; font-style: italic; color: var(--ink-soft); font-size: 17px; }
+
+/* ---------- Text boxes ---------- */
+input[type=text], textarea {
+  width: 100%;
+  font-size: 18px;                    /* 16px or more stops iPhones zooming in when you tap */
+  color: var(--ink);
+  background: #fff;
+  padding: 11px 13px;
+  border: 1.5px solid #d6cdc1;
+  border-radius: 12px;
+}
+textarea { min-height: 92px; resize: vertical; }
+input[type=text]:focus, textarea:focus { border-color: var(--rose); }
+.other { margin-top: 10px; }          /* the "something else?" box under chips */
+
+/* ---------- Chips (the pill-shaped choice buttons) ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--leaf);
+  background: #fff;
+  border: 1.5px solid var(--sage);
+  border-radius: 999px;
+  padding: 7px 14px;
+  min-height: 42px;
+  cursor: pointer;
+}
+/* A chosen chip turns solid green. The JavaScript flips aria-pressed / aria-checked. */
+.chip[aria-pressed=true], .chip[aria-checked=true] { background: var(--leaf); border-color: var(--leaf); color: #fff; }
+
+/* ---------- Colour swatches ---------- */
+.swatches { display: flex; flex-wrap: wrap; gap: 6px 4px; }
+.sw {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 70px;
+  background: none;
+  border: 0;
+  font-size: 14px;
+  line-height: 1.1;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 3px 0;
+  text-align: center;
+}
+.sw i { display: block; position: relative; width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1.5px #cdc4b6; }   /* the coloured circle */
+.sw[aria-pressed=true] i { box-shadow: 0 0 0 3.5px var(--leaf); }   /* green ring when chosen */
+/* The white tick mark drawn with a rotated border. */
+.sw[aria-pressed=true] i::after {
+  content: '';
+  position: absolute;
+  left: 13px; top: 6px;
+  width: 8px; height: 15px;
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  transform: rotate(40deg);
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, .7));   /* so the tick shows on light colours too */
+}
+.sw[aria-pressed=true] { color: var(--ink); font-weight: 700; }
+
+.month { margin: 10px 0 6px; font-style: italic; color: var(--ink-soft); }   /* "December 2026" above the date chips */
+
+/* ---------- Send page ---------- */
+.done { margin: 0 0 12px; padding: 12px 14px; border-radius: 12px; background: var(--sage-light); color: var(--leaf); font-weight: 700; }   /* thank-you banner */
+.missing { margin: 8px 0 0; padding-left: 20px; }
+.preview {
+  width: 100%;
+  min-height: 210px;
+  font-size: 16px;
+  line-height: 1.4;
+  background: #fbf8f3;
+  color: var(--ink);
+  border: 1.5px dashed var(--silver-d);
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 10px;
+}
+.fine { font-size: 16px; color: var(--ink-soft); margin: 10px 0 0; }   /* small print */
+.foot { margin-top: 22px; text-align: center; font-size: 16px; color: var(--ink-soft); }   /* "Not A? Switch name" */

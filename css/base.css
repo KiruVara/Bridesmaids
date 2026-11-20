@@ -1,0 +1,169 @@
+/* =====================================================================
+   base.css  -  THE FOUNDATION
+   Colours, fonts, the page background, and the building blocks that are
+   used on every screen (buttons, rows, headings).
+   If you want to change a colour for the whole site, change it here
+   in the ":root" block at the top.
+   ===================================================================== */
+
+/* ---------- 1. Colour + font "variables" ----------
+   A variable is written --name and used as var(--name).
+   Change a value here and it changes everywhere it is used. */
+:root {
+  --cloth: #3a261b;          /* dark brown tablecloth (page background) */
+  --cloth-2: #2a1a12;        /* darker brown for the very edges */
+  --runner: #f7dfe4;         /* light pink table runner (the main column) */
+  --runner-edge: #e6a9ba;    /* stitching colour on the runner */
+  --plate: #fffdfa;          /* white "plate" cards */
+  --ink: #3a261b;            /* main text colour (dark brown) */
+  --ink-soft: #6c5446;       /* softer text for hints */
+  --leaf: #3f5b3c;           /* deep green */
+  --sage: #86a383;           /* lighter green */
+  --sage-light: #e2ebdd;     /* very light green */
+  --rose: #b84a6b;           /* bow pink (buttons, headings) */
+  --rose-soft: #f2a9bc;      /* light pink */
+  --silver: #c9ccd2;         /* silver cutlery colour */
+  --silver-d: #8d939c;       /* darker silver */
+
+  /* Fonts: the first one is used if it loads, otherwise the next one, and so on. */
+  --font-script: 'Pinyon Script', 'Snell Roundhand', 'Brush Script MT', cursive;
+  --font-body: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+
+  box-sizing: border-box;
+  /* Keeps content away from the phone's notch / home bar. */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* If a phone is in dark mode we nudge two colours (the page is already dark brown). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --runner: #f2d6dc; --plate: #fbf7f3; }
+}
+:root[data-theme="dark"] { --runner: #f2d6dc; --plate: #fbf7f3; }
+
+/* ---------- 2. The page itself ---------- */
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  background: var(--cloth-2);
+}
+
+/* Make width/height include padding and borders (much easier maths). */
+*, *::before, *::after { box-sizing: inherit; }
+
+/* The "tablecloth": a dark brown base with a faint linen weave drawn using gradients. */
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.5;
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, .07), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, .14) 0 1px, transparent 1px 6px),
+    var(--cloth);
+}
+
+/* Buttons and inputs do not inherit the font by default, so we ask them to. */
+button, input, textarea { font-family: inherit; }
+
+/* A clear ring around whatever you tab to with the keyboard (good for accessibility). */
+:focus-visible { outline: 3px solid var(--rose); outline-offset: 2px; }
+
+/* ---------- 3. The layout: tablecloth > runner > content ---------- */
+.wrap {
+  max-width: 640px;          /* the pink runner never gets wider than this */
+  margin: 0 auto;            /* centres it */
+  padding: 14px 12px 48px;
+}
+
+/* The light pink table runner that holds everything. */
+.runner {
+  position: relative;
+  background: var(--runner);
+  border-radius: 4px;
+  padding: 6px 16px 30px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .25), 0 22px 44px rgba(0, 0, 0, .4);
+}
+
+/* Dashed "stitching" down both edges of the runner. */
+.runner::before, .runner::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  width: 0;
+  border-left: 1.5px dashed rgba(184, 74, 107, .38);
+}
+.runner::before { left: 8px; }
+.runner::after { right: 8px; }
+
+/* The eucalyptus garland drawn across the top (and bottom) of pages. */
+.garland { margin: 0 -6px; }
+.garland svg { display: block; width: 100%; height: auto; }
+
+/* ---------- 4. Text helpers ---------- */
+h1, h2, h3 { margin: 0; font-weight: 600; }
+.script { font-family: var(--font-script); font-weight: 400; color: var(--rose); line-height: 1.05; }
+.big { font-size: clamp(44px, 12vw, 62px); }   /* clamp(min, ideal, max) keeps text a good size on any screen */
+.mid { font-size: clamp(34px, 8vw, 42px); }
+.center { text-align: center; }
+.soft { color: var(--ink-soft); }
+.under { display: block; margin: 2px auto 0; width: 150px; height: 9px; }   /* hand-drawn underline */
+
+/* ---------- 5. Shared building blocks ---------- */
+
+/* Small red message under inputs (errors, "which one are you?"). */
+.msg {
+  min-height: 1.4em;
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 17px;
+  color: var(--rose);
+  font-weight: 600;
+}
+
+/* A button that looks like a link. */
+.linkbtn {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  color: var(--leaf);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* The main pink pill button. Variants below: .ghost (white) and .green. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--rose);
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 26px;
+  min-height: 46px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 3px 0 #8f3550;                     /* the little "ledge" under the button */
+  transition: transform .15s, box-shadow .15s;
+}
+.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #8f3550; }   /* pressed-down look */
+.btn.ghost { background: #fff; color: var(--rose); border: 2px solid var(--rose); box-shadow: none; }
+.btn.green { background: var(--leaf); box-shadow: 0 3px 0 #2b4029; }
+
+/* A centred row of buttons that wraps onto new lines on small screens. */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 14px 0 4px;
+}
