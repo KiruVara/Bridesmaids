@@ -57,7 +57,7 @@ function buildQuestion(question, index) {
   const labelId = 'label-' + index;
 
   parts.push(h('span', { class: 'lbl', id: labelId }, question.label, question.required ? h('span', { class: 'req' }, 'needed') : null));
-  if (question.hint) { parts.push(h('div', { class: 'hint' }, question.hint)); }
+  if (question.hint) { parts.push(h('div', { class: 'hint', html: question.hint })); }
   if (question.help) {
     parts.push(h('details', { class: 'help' }, h('summary', null, 'How do I know?'), h('p', null, question.help)));
   }
