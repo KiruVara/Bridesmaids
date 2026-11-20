@@ -10,7 +10,7 @@
 /* The colour circles used by "colours" questions. n = name, h = colour code. */
 const COLOURS = [
   { n: 'Blush pink', h: '#f4c6d0' }, { n: 'Rose', h: '#d9728f' }, { n: 'Burgundy', h: '#7d2a44' },
-  { n: 'Coral', h: '#f08a76' }, { n: 'Tangerine', h: '#FF' }, { n: 'Peach', h: '#f7c9a6' }, { n: 'Butter yellow', h: '#f5e3a0' },
+  { n: 'Coral', h: '#f08a76' }, { n: 'Tangerine', h: '#F28500' }, { n: 'Peach', h: '#f7c9a6' }, { n: 'Butter yellow', h: '#f5e3a0' },
   { n: 'Sage green', h: '#9db79a' }, { n: 'Forest green', h: '#3f5b3c' }, { n: 'Sky blue', h: '#a9cde6' },
   { n: 'Navy', h: '#27406b' }, { n: 'Lavender', h: '#c9b6e4' }, {n: 'Eggplant', h: '#472c4c'},{ n: 'Cream', h: '#f6ecd9' },
   { n: 'Chocolate', h: '#5a3a2a' }, { n: 'Black', h: '#222222' },  { n: 'White', h: '#FBFCF8' }
